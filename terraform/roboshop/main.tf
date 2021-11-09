@@ -19,7 +19,7 @@ resource "aws_spot_instance_request" "cheap_worker" {
   vpc_security_group_ids = ["sg-08797573be56216ce"]
   wait_for_fulfillment   = true
   tags = {
-    Name = local.COMP_NAME
+    Name = element(var.components, count.index)
   }
 }
 
@@ -27,9 +27,15 @@ resource "aws_ec2_tag" "tags" {
   count       = length(var.components)
   resource_id = element(aws_spot_instance_request.cheap_worker.*.spot_instance_id, count.index)
   key         = "Name"
-  value       = local.COMP_NAME
+  value       = element(var.components, count.index)
 }
 
-locals {
-  COMP_NAME = element(var.components, count.index)
+resource "aws_route53_record" "records" {
+  count       = length(var.components)
+  zone_id = "Z08193961Q42H5MS0MD57"
+  name    = "${element(var.components, count.index)}-dev.roboshop.internal"
+  type    = "A"
+  ttl     = "300"
+  records = [element(aws_spot_instance_request.cheap_worker.*.private_ip, count.index)]
+  allow_overwrite = true
 }
