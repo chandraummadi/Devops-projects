@@ -1,0 +1,45 @@
+- name: Install nginx
+  ansible.builtin.yum:
+    name: nginx
+    state: present
+
+- name: Download code
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: download
+  vars:
+    APP_LOCATION: /usr/share/nginx/html
+
+- name: Copy HTTP docs file
+  ansible.builtin.copy:
+    src: /tmp/frontend-main/static/
+    dest: /usr/share/nginx/html
+    remote_src: yes
+
+- name: start the nginx services
+  ansible.builtin.systemd:
+    name: nginx
+    state: restarted
+    enabled: yes
+    daemon_reload: yes
+
+
+
+# # yum install nginx -y
+# # systemctl enable nginx
+# # systemctl start nginx
+# Let's download the HTDOCS content and deploy under the Nginx path.
+
+# # curl -s -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/frontend/archive/main.zip"
+# Deploy in Nginx Default Location.
+
+# # cd /usr/share/nginx/html
+# # rm -rf *
+# # unzip /tmp/frontend.zip
+# # mv frontend-main/* .
+# # mv static/* .
+# # rm -rf frontend-master static README.md
+# # mv localhost.conf /etc/nginx/default.d/roboshop.conf
+# Finally restart the service once to effect the changes.
+
+# # systemctl restart nginx
