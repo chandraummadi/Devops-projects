@@ -3,6 +3,7 @@
     src: https://github.com/roboshop-devops-project/{{COMPONENT}}/archive/main.zip
     dest: /tmp
     remote_src: yes
+
 - name: Remove exiting code
   ansible.builtin.file:
     path: "{{APP_LOCATION}}"
