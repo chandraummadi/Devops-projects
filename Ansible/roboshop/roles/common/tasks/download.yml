@@ -8,3 +8,4 @@
   ansible.builtin.file:
     path: "{{APP_LOCATION}}"
     state: absent
+  when: APP_TYPE == "frontend" or APP_TYPE == "backend"
