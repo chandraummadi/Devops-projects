@@ -1,0 +1,32 @@
+## yum install epel-release yum-utils -y
+## yum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm -y
+## yum-config-manager --enable remi
+## yum install redis -y
+#Update the BindIP from 127.0.0.1 to 0.0.0.0 in config file /etc/redis.conf & /etc/redis/redis.conf
+#
+#Start Redis Database
+#
+## systemctl enable redis
+## systemctl start redis
+- name: install redis repos
+  ansible.builtin.yum:
+    name: http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+    state: present
+
+- name: install redis
+  ansible.builtin.yum:
+    name: redis
+    enablerepo: remi
+
+
+- name: update redis listen address
+  ansible.builtin.replace:
+    path: /etc/redis.conf
+    regexp: '127.0.0.1'
+    replace: '0.0.0.0'
+
+- name: start the redis service
+  ansible.builtin.systemd:
+    name: redis
+    state: restarted
+    enabled: yes
