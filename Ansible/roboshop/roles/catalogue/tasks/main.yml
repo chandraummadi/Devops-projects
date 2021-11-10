@@ -13,11 +13,6 @@
     name: common
     tasks_from: download
 
-- name: remove existing code
-  ansible.builtin.file:
-    path: /home/roboshop/catalogue
-    state: absent
-
 - name: Copy App code
   ansible.builtin.copy:
     src: /tmp/catalogue-main
