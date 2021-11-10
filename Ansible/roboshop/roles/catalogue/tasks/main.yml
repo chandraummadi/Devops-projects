@@ -12,6 +12,9 @@
   ansible.builtin.include_role:
     name: common
     tasks_from: download
+  vars:
+    APP_LOCATION: /home/roboshop/catalogue
+    APP_USER: roboshop
 
 - name: Copy App code
   ansible.builtin.copy:
