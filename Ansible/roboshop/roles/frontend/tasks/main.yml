@@ -11,7 +11,7 @@
     APP_LOCATION: /usr/share/nginx/html
 
 - name: Copy HTTP docs file
-  ansible.builtin.copy:
+  ansible.builtin.template:
     src: /tmp/frontend-main/static/
     dest: /usr/share/nginx/html
     remote_src: yes
