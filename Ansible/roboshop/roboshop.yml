@@ -1,4 +1,20 @@
 - name: setup frontend
   hosts: frontend
+  become: true
+  tags: frontend
   roles:
     - frontend
+
+- name: setup Mongodb
+  hosts: mongodb
+  become: true
+  tags: mongodb
+  roles:
+    - mongodb
+
+- name: setup Catalogue
+  hosts: catalogue
+  become: true
+  tags: catalogue
+  roles:
+    - catalogue
