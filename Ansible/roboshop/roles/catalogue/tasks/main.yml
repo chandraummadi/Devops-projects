@@ -23,3 +23,10 @@
     src: /tmp/catalogue-main
     dest: /home/roboshop/catalogue
     remote_src: yes
+  become_user: roboshop
+
+- name: Install packages based on package.json.
+  community.general.npm:
+    path: /home/roboshop/catalogue
+  become_user: roboshop
+
