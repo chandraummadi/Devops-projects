@@ -52,7 +52,7 @@ resource "aws_route53_record" "records" {
 #      "sudo yum install python3-pip -y",
 #      "sudo pip3 install pip --upgrade",
 #      "sudo pip3 install ansible",
-#      "ansible-pull -U https://github.com/chandraummadi/Devops-projects/tree/main/Ansible/roboshop roboshop-pull.yml -e COMPONENT=${element(var.components, count.index)} -e ENV=dev"
+#      "ansible-pull -U https://github.com/chandraummadi/Devops-projects.git /Ansible/roboshop/roboshop-pull.yml -e COMPONENT=${element(var.components, count.index)} -e ENV=dev"
 #    ]
 #  }
 #}
