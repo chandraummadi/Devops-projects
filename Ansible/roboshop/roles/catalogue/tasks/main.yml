@@ -16,13 +16,6 @@
     APP_LOCATION: /home/roboshop/catalogue
     APP_USER: roboshop
 
-- name: Copy App code
-  ansible.builtin.copy:
-    src: /tmp/catalogue-main/
-    dest: /home/roboshop/catalogue
-    remote_src: yes
-  become_user: roboshop
-
 - name: Install Nodejs dependencies
   community.general.npm:
     path: /home/roboshop/catalogue
