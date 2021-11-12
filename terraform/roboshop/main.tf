@@ -39,21 +39,21 @@ resource "aws_route53_record" "records" {
   records = [element(aws_spot_instance_request.cheap_worker.*.private_ip, count.index)]
   allow_overwrite = true
 }
-resource "null_resource" "ansible" {
-  depends_on = [aws_route53_record.records]
-  count      = length(var.components)
-  provisioner "remote-exec" {
-    connection {
-      host     = element(aws_spot_instance_request.cheap_worker.*.private_ip, count.index)
-      user     = "centos"
-      password = "DevOps321"
-    }
-    inline = [
-      "sudo yum install python3-pip -y",
-      "sudo pip3 install pip --upgrade",
-      "sudo pip3 install ansible",
-      "ansible-pull -U https://github.com/chandraummadi/Devops-projects/tree/main/Ansible/roboshop roboshop-pull.yml -e COMPONENT=${element(var.components, count.index)} -e ENV=dev"
-    ]
-  }
-}
+#resource "null_resource" "ansible" {
+#  depends_on = [aws_route53_record.records]
+#  count      = length(var.components)
+#  provisioner "remote-exec" {
+#    connection {
+#      host     = element(aws_spot_instance_request.cheap_worker.*.private_ip, count.index)
+#      user     = "centos"
+#      password = "DevOps321"
+#    }
+#    inline = [
+#      "sudo yum install python3-pip -y",
+#      "sudo pip3 install pip --upgrade",
+#      "sudo pip3 install ansible",
+#      "ansible-pull -U https://github.com/chandraummadi/Devops-projects/tree/main/Ansible/roboshop roboshop-pull.yml -e COMPONENT=${element(var.components, count.index)} -e ENV=dev"
+#    ]
+#  }
+#}
 
