@@ -40,3 +40,51 @@
   roles:
     - user
 
+- name: setup Redis
+  hosts: redis
+  become: true
+  tags: redis
+  roles:
+    - redis
+
+- name: setup Cart
+  hosts: cart
+  become: true
+  tags: cart
+  roles:
+    - cart
+
+- name: setup User
+  hosts: user
+  become: true
+  tags: user
+  roles:
+    - user
+
+- name: Setup MySQL
+  hosts: mysql
+  become: true
+  tags: mysql
+  roles:
+    - mysql
+
+- name: Setup Shipping
+  hosts: shipping
+  become: true
+  tags: shipping
+  roles:
+    - shipping
+
+- name: Setup RabbitMQ
+  hosts: rabbitmq
+  become: true
+  tags: rabbitmq
+  roles:
+    - rabbitmq
+
+- name: Setup payment
+  hosts: payment
+  become: true
+  tags: payment
+  roles:
+    - payment
