@@ -1,34 +1,4 @@
-- name: Install NodeJS
-  ansible.builtin.yum:
-    name: ["nodejs", "make", "gcc-c++"]
-    state: present
-
-- name: Add roboshop user
-  ansible.builtin.user:
-    name: roboshop
-    comment: roboshop user
-
-- name: Download code
+- name: Import NodejS
   ansible.builtin.include_role:
     name: common
-    tasks_from: download
-  vars:
-    APP_LOCATION: /home/roboshop/catalogue
-    APP_USER: roboshop
-
-- name: Install Nodejs dependencies
-  community.general.npm:
-    path: /home/roboshop/catalogue
-  become_user: roboshop
-
-- name: update systemd file
-  ansible.builtin.template:
-    src: systemd.service
-    dest: /etc/systemd/system/catalogue.service
-
-- name: start Catalogue service
-  ansible.builtin.systemd:
-    name: catalogue
-    state: restarted
-    enabled: yes
-    daemon_reload: yes
+    tasks_from: nodejs

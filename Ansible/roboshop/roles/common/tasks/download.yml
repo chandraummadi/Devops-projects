@@ -1,3 +1,9 @@
+- name: Add roboshop user
+  ansible.builtin.user:
+    name: roboshop
+  when: APP_TYPE == "backend"
+  register: app_user_info
+
 - name: Unarchive a file that needs to be downloaded.
   ansible.builtin.unarchive:
     src: https://github.com/roboshop-devops-project/{{COMPONENT}}/archive/main.zip
