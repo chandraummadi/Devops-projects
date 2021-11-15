@@ -18,3 +18,25 @@
   tags: catalogue
   roles:
     - catalogue
+
+- name: setup Redis
+  hosts: redis
+  become: true
+  tags: redis
+  roles:
+    - redis
+
+- name: setup Cart
+  hosts: cart
+  become: true
+  tags: cart
+  roles:
+    - cart
+
+- name: setup User
+  hosts: user
+  become: true
+  tags: user
+  roles:
+    - user
+

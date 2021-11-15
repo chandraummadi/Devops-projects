@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 variable "components" {
-  default = ["frontend", "mongodb", "catalogue"]
+  default = ["frontend", "mongodb", "catalogue", "cart", "user", "redis"]
 }
 
 data "aws_ami" "ami" {
