@@ -12,7 +12,7 @@ data "aws_ami" "ami" {
   most_recent  = true
 }
 
-resource "aws_spot_instance_request" "cheap_worker" {+
+resource "aws_spot_instance_request" "cheap_worker" {
   count                  = length(var.components)
   ami                    = data.aws_ami.ami.id
   instance_type          = "t2.micro"
